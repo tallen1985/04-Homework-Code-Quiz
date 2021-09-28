@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="./assets/css/style.css" rel="stylesheet">
+    <title>04 Homework - Code Quiz</title>
+</head>
+<body>
+    <header>
+        <h2>View High Scores</h2>
+        <h2>Time: <span id="timeRemaining"></span></h2>
+    </header>
+    <main>
+        <div id="startDiv">
+            <h1>Coding Quiz</h1>
+            <p>Try to answer the coding related questions within the time limit.  Keep in mind that incorrect answers will penalize your score/time by tem seconds!</p>
+            <br>
+            <button id="startBtn" class="button" onclick="playGame()">Start Quiz</button>
+        </div>
+        <div id="questionDiv">
+            <h2 id="questionText">Test</h2>
+            <button class="choiceBtn button">" "</button>
+            <button class="choiceBtn button">" "</button>
+            <button class="choiceBtn button">" "</button>
+            <button class="choiceBtn button">" "</button>
+        </div>
+    </main>
+    <script src="assets/js/script.js"></script>
+</body>
+</html>

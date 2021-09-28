@@ -1,0 +1,51 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+    margin: 0 auto;
+}
+    header h2 {
+        margin-top: 0;
+        display: inline-block;
+    }
+
+main {
+    width: 60%;
+    margin: 5vw auto;
+    text-align: center;
+}
+
+.button {
+    font-size: 20px;
+    background-color: teal;
+    color: whitesmoke;
+    padding: 8px 10px;
+    border-radius: 5px;
+    transition: all 0.1s;
+    margin: 5px;
+}
+    .button:hover {
+        background-color: whitesmoke;
+        color: black;
+        border: 3px solid teal;
+    }
+#questionDiv {
+    display: none;
+}
+#questionText {
+    text-align: left;
+    padding: 10px 0;
+}
+
+.choiceBtn {
+    display: block;
+}
