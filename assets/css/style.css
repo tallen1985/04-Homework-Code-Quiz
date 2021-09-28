@@ -17,6 +17,12 @@ header {
         margin-top: 0;
         display: inline-block;
     }
+    header a {
+        text-decoration: underline;
+    }
+    header a:hover {
+        color: teal;
+    }
 
 main {
     width: 60%;
@@ -46,6 +52,35 @@ main {
     padding: 10px 0;
 }
 
+#answerStatus {
+    display: none;
+    margin: 10px 0;
+    color: darkslategray;
+}
+    #answerStatus p {
+        margin: 10px 0;
+        text-align: left;
+        font-style: italic;
+    }
+
+#scoreDiv {
+    display: none;
+}
+
+#highScoreDiv {
+    display: none;
+}
+#highScoreTable {
+    width: 40%;
+    text-align: left;
+    margin: 0 auto;
+}
+    #highScoreTable th {
+        width: 50%;
+    }
+    #highScoreTable tr:nth-child(odd){
+        background-color: lightgray;
+    }
 .choiceBtn {
     display: block;
 }

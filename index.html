@@ -9,7 +9,7 @@
 </head>
 <body>
     <header>
-        <h2>View High Scores</h2>
+        <h2><a onclick="displayHighScore()">View High Scores</a></h2>
         <h2>Time: <span id="timeRemaining"></span></h2>
     </header>
     <main>
@@ -25,6 +25,27 @@
             <button class="choiceBtn button">" "</button>
             <button class="choiceBtn button">" "</button>
             <button class="choiceBtn button">" "</button>
+            <div id="answerStatus">
+                <hr>
+                <p id="answerText">"Correct"</p>
+            </div>
+        </div>
+        <div id="scoreDiv">
+            <h2>All Done!</h2>
+            <p>Your final score is <span id="score"> </span>.</p>
+            <label for="initials">Enter Initials: </label>
+            <input name="initials" id="initialsInput" type="text" maxlength="3">
+            <button class="button" id="newScoreButton" onclick="addToHighScore()">Submit</button>
+        </div>
+        <div id="highScoreDiv">
+            <h2>High Scores</h2>
+            <table id = "highScoreTable">
+                <tr>
+                    <th>Initials</th>
+                    <th>Score</th>
+                </tr>
+            </table>
+            <button class="button" onclick="replay()">Play Again</button>
         </div>
     </main>
     <script src="assets/js/script.js"></script>
