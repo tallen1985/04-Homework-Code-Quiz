@@ -1,9 +1,4 @@
-let gameStats = {
-        score: 0,
-        timeRemaining: 75,
-        initials: "",
-        questionNumber: 0
-    };
+let gameStats;
 
 let highScores = [{
         score: 10,
@@ -16,28 +11,25 @@ let highScores = [{
         initials: 'IPA'
     }
     ]
-    
-const questions = [{
-        question: "Commonly used Data Types DO NOT include:",
-        choice: ["1: Strings", "2: Boolean", "3: Alerts", "4: Numbers"],
-        correctAnswer: "3: Alerts"
-    }, {
-        question: "The condition in an if / else statement is enclosed within _____.",
-        choice: ["1: Quotes", "2: Curly Brackets", "3: Parenthesis", "4: Square Brackets"],
-        correctAnswer: "3: Parenthesis"
-    }]
+const questionNum = document.getElementById('questionNum');
+const timeSpan = document.getElementById("timeRemaining");
+const startDiv = document.getElementById('startDiv');
+const questionDiv = document.getElementById('questionDiv');
+const answerText = document.getElementById('answerText');
+const scoreDiv = document.getElementById('scoreDiv');
+const highScoreDiv = document.getElementById('highScoreDiv');
+const input = document.getElementById('initialsInput');
 
 let gameTimer;
 
 function playGame() {
-    const timeSpan = document.getElementById("timeRemaining");
-
-    document.getElementById('startDiv').style.display = "none";
-    document.getElementById('questionDiv').style.display = "block";
+    startDiv.style.display = "none";
+    questionDiv.style.display = "block";
+    input.value = "";
     
     gameStats = {
         score: 0,
-        timeRemaining: 75,
+        timeRemaining:25,
         initials: "",
         questionNumber: 0
     };
@@ -45,19 +37,21 @@ function playGame() {
     displayQuestion();
 
     gameTimer = setInterval(function() {
-        if (gameStats.timeRemaining === 0) {
-            clearInterval(gameTimer);
-            alert('game over');
+        if (gameStats.timeRemaining <= 0) {
+            displayScore();
+        } else {
+            timeSpan.innerHTML = gameStats.timeRemaining;
+            gameStats.timeRemaining--;
         }
-        timeSpan.innerHTML = gameStats.timeRemaining;
-        gameStats.timeRemaining--;
     }, 1000);
 }
 
 function displayQuestion() {
-    let questionText = document.getElementById('questionText');
+    const questionText = document.getElementById('questionText');
     const choiceText = document.getElementsByClassName('choiceBtn');
     let currentQuestion = questions[gameStats.questionNumber];
+
+    questionNum.innerText = `Question ${gameStats.questionNumber + 1} out of ${questions.length}.`;
 
     questionText.innerText = currentQuestion.question;
 
@@ -68,50 +62,61 @@ function displayQuestion() {
 }
 
 function checkAnswer(answer){
-    let answerText = document.getElementById('answerText');
-    document.getElementById('answerStatus').style.display = "block";
+    
+    const answerStatus = document.getElementById('answerStatus')
+
+    answerStatus.style.display = "block";
+
     if (answer === questions[gameStats.questionNumber].correctAnswer) {
         answerText.innerText = "Correct!"
-        gameStats.score++;
+        gameStats.score += 5;
     } else {
         answerText.innerText = "Incorrect!"
         gameStats.timeRemaining -= 10;
     };
 
     setTimeout(function (){
-    document.getElementById('answerStatus').style.display = "none";
+    answerStatus.style.display = "none";
         gameStats.questionNumber++;
     if (questions.length !== (gameStats.questionNumber)){
         displayQuestion();
     } else {
-        clearInterval(gameTimer);
         displayScore();
     }
-    }, 2000); 
+    }, 1000); 
 }
 
 function displayScore() {
-    document.getElementById('questionDiv').style.display = 'none';
-    document.getElementById('answerText').style.display = "none";
-    document.getElementById('scoreDiv').style.display = "block";
+    timeSpan.textContent = " ";
+    clearInterval(gameTimer);
+    questionDiv.style.display = 'none';
+    answerText.style.display = "none";
+    scoreDiv.style.display = "block";
     document.getElementById('score').innerText = gameStats.score;
 }
 function addToHighScore(){
-    let newHighScore = {
-        score: gameStats.score,
-        initials: document.getElementById('initialsInput').value
+    
+    if (input.value) {
+        let newHighScore = {
+            score: gameStats.score,
+            initials: input.value
+        }
+        highScores.push(newHighScore);
+        displayHighScore();
+    } else {
+        input.setAttribute("placeholder", "Initials Please");
     }
-    highScores.push(newHighScore);
-    displayHighScore();
+    
 }
 function displayHighScore() {
     if (gameTimer) {
         clearInterval(gameTimer);
     }
-    document.getElementById('questionDiv').style.display = 'none';
-    document.getElementById('answerText').style.display = "none";
-    document.getElementById('scoreDiv').style.display = "none";
-    document.getElementById('highScoreDiv').style.display = "block";
+    questionDiv.style.display = 'none';
+    answerText.style.display = "none";
+    scoreDiv.style.display = "none";
+    highScoreDiv.style.display = "block";
+    
     let table = document.getElementById('highScoreTable');
     highScores.sort(function (a, b){
         return b.score - a.score;
@@ -130,10 +135,9 @@ function displayHighScore() {
 }
 
 function replay() {
-    document.getElementById('highScoreDiv').style.display = "none";
-
-    document.getElementById('startDiv').style.display = "block";
-    document.getElementById('timeRemaining').innerText = "";
-    document.getElementById('initialInput').value = "";
+    highScoreDiv.style.display = "none";
+    startDiv.style.display = "block";
+    timeSpan.innerText = "";
+    
 }
 
