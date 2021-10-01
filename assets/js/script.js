@@ -1,16 +1,16 @@
 let gameStats;
-
 let highScores = [{
-        score: 10,
-        initials: "TJA"
-    }, {
-        score: 25,
-        initials: "LJA"
-    }, {
-        score: 14,
-        initials: 'IPA'
-    }
-    ]
+    score: 10,
+    initials: "TJA"
+}, {
+    score: 25,
+    initials: "LJA"
+}, {
+    score: 14,
+    initials: 'IPA'
+}
+]
+let gameTimer;
 const questionNum = document.getElementById('questionNum');
 const timeSpan = document.getElementById("timeRemaining");
 const startDiv = document.getElementById('startDiv');
@@ -19,8 +19,9 @@ const answerText = document.getElementById('answerText');
 const scoreDiv = document.getElementById('scoreDiv');
 const highScoreDiv = document.getElementById('highScoreDiv');
 const input = document.getElementById('initialsInput');
+document.getElementById('displayHighScore').addEventListener('click', displayHighScore);
 
-let gameTimer;
+
 
 function playGame() {
     startDiv.style.display = "none";
@@ -57,7 +58,10 @@ function displayQuestion() {
 
     for (let x = 0; x < currentQuestion.choice.length; x++){
         choiceText[x].innerText = currentQuestion.choice[x];
-        choiceText[x].setAttribute('onclick', 'checkAnswer("'+ currentQuestion.choice[x] +'")');
+        choiceText[x].addEventListener('click', (e) => {
+            e.stopPropagation();
+            checkAnswer(e.currentTarget.textContent)
+        })
     }
 }
 
@@ -95,20 +99,21 @@ function displayScore() {
     document.getElementById('score').innerText = gameStats.score;
 }
 function addToHighScore(){
-    
+   
     if (input.value) {
         let newHighScore = {
             score: gameStats.score,
             initials: input.value
-        }
+        };
         highScores.push(newHighScore);
+        
         displayHighScore();
     } else {
         input.setAttribute("placeholder", "Initials Please");
     }
     
-}
-function displayHighScore() {
+} 
+function displayHighScore(){
     if (gameTimer) {
         clearInterval(gameTimer);
     }
