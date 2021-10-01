@@ -106,6 +106,12 @@ main {
 .choiceBtn {
     display: block;
 }
+#clearScores {
+    text-decoration: underline;
+}
+#clearScores:hover {
+    color: var(--orange);
+}
 
 @media (hover: hover) {
     .button:hover {

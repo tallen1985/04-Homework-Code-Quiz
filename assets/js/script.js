@@ -1,16 +1,11 @@
 let gameStats;
-let highScores = [{
-    score: 10,
-    initials: "TJA"
-}, {
-    score: 25,
-    initials: "LJA"
-}, {
-    score: 14,
-    initials: 'IPA'
-}
-]
 let gameTimer;
+let highScores = [];
+
+if (localStorage.getItem('highScores')){
+    highScores = JSON.parse(localStorage.getItem('highScores'));
+}
+
 const questionNum = document.getElementById('questionNum');
 const timeSpan = document.getElementById("timeRemaining");
 const startDiv = document.getElementById('startDiv');
@@ -19,8 +14,20 @@ const answerText = document.getElementById('answerText');
 const scoreDiv = document.getElementById('scoreDiv');
 const highScoreDiv = document.getElementById('highScoreDiv');
 const input = document.getElementById('initialsInput');
+const clearScores = document.getElementById('clearScores')
 document.getElementById('displayHighScore').addEventListener('click', displayHighScore);
+questionDiv.addEventListener('click', function(e) {
+    const el = e.target;
+    if (el.matches('.choiceBtn')){
+        checkAnswer(el.textContent)
 
+    }
+});
+clearScores.addEventListener('click', function() {
+    highScores = [];
+    alert('cleared');
+
+})
 
 
 function playGame() {
@@ -44,7 +51,7 @@ function playGame() {
             timeSpan.innerHTML = gameStats.timeRemaining;
             gameStats.timeRemaining--;
         }
-    }, 1000);
+    }, 750);
 }
 
 function displayQuestion() {
@@ -58,10 +65,6 @@ function displayQuestion() {
 
     for (let x = 0; x < currentQuestion.choice.length; x++){
         choiceText[x].innerText = currentQuestion.choice[x];
-        choiceText[x].addEventListener('click', (e) => {
-            e.stopPropagation();
-            checkAnswer(e.currentTarget.textContent)
-        })
     }
 }
 
@@ -106,8 +109,8 @@ function addToHighScore(){
             initials: input.value
         };
         highScores.push(newHighScore);
-        
         displayHighScore();
+        localStorage.setItem('highScores', JSON.stringify(highScores))
     } else {
         input.setAttribute("placeholder", "Initials Please");
     }
