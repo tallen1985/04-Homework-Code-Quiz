@@ -12,4 +12,4 @@ Create a dynamically generated quiz based on Coding Questions.  This quiz should
 ## Final Product
 
 ![Code Quiz Screenshot](./assets/04-Homework-screenshot.jpg)
- https://tallen1985.github.io/04-Homework-Code-Quiz/]
+ https://tallen1985.github.io/04-Homework-Code-Quiz/

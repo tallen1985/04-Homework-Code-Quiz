@@ -136,6 +136,8 @@ function displayHighScore(){
     answerText.style.display = "none";
     scoreDiv.style.display = "none";
     highScoreDiv.style.display = "block";
+
+    
     
     let table = document.getElementById('highScoreTable');
     highScores.sort(function (a, b){
