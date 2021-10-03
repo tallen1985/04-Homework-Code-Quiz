@@ -1,11 +1,14 @@
+//Declare Global Variables
 let gameStats;
 let gameTimer;
 let highScores = [];
 
+//check for previously saved localStorage and get them.
 if (localStorage.getItem('highScores')){
     highScores = JSON.parse(localStorage.getItem('highScores'));
 }
 
+//Javascript Element selectors
 const questionNum = document.getElementById('questionNum');
 const timeSpan = document.getElementById("timeRemaining");
 const startDiv = document.getElementById('startDiv');
@@ -15,7 +18,10 @@ const scoreDiv = document.getElementById('scoreDiv');
 const highScoreDiv = document.getElementById('highScoreDiv');
 const input = document.getElementById('initialsInput');
 const clearScores = document.getElementById('clearScores')
+
+//Javascript event listeners
 document.getElementById('displayHighScore').addEventListener('click', displayHighScore);
+
 questionDiv.addEventListener('click', function(e) {
     const el = e.target;
     if (el.matches('.choiceBtn')){
@@ -29,7 +35,7 @@ clearScores.addEventListener('click', function() {
 
 })
 
-
+//Function to start and facilitate game play.
 function playGame() {
     startDiv.style.display = "none";
     questionDiv.style.display = "block";
@@ -37,7 +43,7 @@ function playGame() {
     
     gameStats = {
         score: 0,
-        timeRemaining:25,
+        timeRemaining:75,
         initials: "",
         questionNumber: 0
     };
@@ -53,7 +59,7 @@ function playGame() {
         }
     }, 750);
 }
-
+//Display a new question and populate buttons with choices.
 function displayQuestion() {
     const questionText = document.getElementById('questionText');
     const choiceText = document.getElementsByClassName('choiceBtn');
@@ -68,6 +74,7 @@ function displayQuestion() {
     }
 }
 
+//Check answer once user clicks on a choice
 function checkAnswer(answer){
     
     const answerStatus = document.getElementById('answerStatus')
@@ -93,6 +100,7 @@ function checkAnswer(answer){
     }, 1000); 
 }
 
+//Display the Score and hide the rest of the elements
 function displayScore() {
     timeSpan.textContent = " ";
     clearInterval(gameTimer);
@@ -101,6 +109,8 @@ function displayScore() {
     scoreDiv.style.display = "block";
     document.getElementById('score').innerText = gameStats.score;
 }
+
+//Convert highScore object to JSON and save in localStorage
 function addToHighScore(){
    
     if (input.value) {
@@ -116,6 +126,8 @@ function addToHighScore(){
     }
     
 } 
+
+//display High Score element and hide the rest, create score table
 function displayHighScore(){
     if (gameTimer) {
         clearInterval(gameTimer);
@@ -142,6 +154,7 @@ function displayHighScore(){
     }
 }
 
+//reset the elements to replay the game.
 function replay() {
     highScoreDiv.style.display = "none";
     startDiv.style.display = "block";
