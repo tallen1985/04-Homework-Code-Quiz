@@ -133,7 +133,6 @@ function displayHighScore(){
         clearInterval(gameTimer);
     }
     questionDiv.style.display = 'none';
-    answerText.style.display = "none";
     scoreDiv.style.display = "none";
     highScoreDiv.style.display = "block";
 
