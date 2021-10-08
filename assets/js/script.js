@@ -80,6 +80,7 @@ function checkAnswer(answer){
     const answerStatus = document.getElementById('answerStatus')
 
     answerStatus.style.display = "block";
+    answerText.style.display = 'block';
 
     if (answer === questions[gameStats.questionNumber].correctAnswer) {
         answerText.innerText = "Correct!"
@@ -91,6 +92,7 @@ function checkAnswer(answer){
 
     setTimeout(function (){
     answerStatus.style.display = "none";
+    answerText.style.display = 'none';
         gameStats.questionNumber++;
     if (questions.length !== (gameStats.questionNumber)){
         displayQuestion();
