@@ -65,6 +65,8 @@ function displayQuestion() {
     const choiceText = document.getElementsByClassName('choiceBtn');
     let currentQuestion = questions[gameStats.questionNumber];
 
+    highScoreDiv.style.display = 'none';
+
     questionNum.innerText = `Question ${gameStats.questionNumber + 1} out of ${questions.length}.`;
 
     questionText.innerText = currentQuestion.question;
